@@ -24,6 +24,24 @@ public class GildedRose {
         updateQuality();
     }
 
+    public static void updateQuality(List<Item> anotherItems){
+        items = anotherItems;
+
+        updateQuality();
+
+        printItem();
+    }
+
+    private static void printItem() {
+        for(Item item: items){
+            System.out.println(itemToString(item));
+        }
+    }
+
+    private static String itemToString(Item item) {
+        return String.format("Item{%s, %s, %s}", item.getName(), item.getQuality(), item.getSellIn());
+    }
+
 
     public static void updateQuality() {
         for (int i = 0; i < items.size(); i++) {
