@@ -31,20 +31,22 @@ public class GildedRose {
     }
 
     public static void updateQuality(Item item) {
-        if ("Aged Brie".equals(item.getName())) {
-            updateQualityAgedBrie(item);
-            return;
-        }
-        if ("Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
-            updateQualityBackstagePasses(item);
-            return;
-        }
-        if ("Sulfuras, Hand of Ragnaros".equals(item.getName())) {
-            updateQualitySulfuras(item);
-            return;
-        }
+        AbstractItem abstractItem;
+        abstractItem = ItemFactory.createItem(item.getName(), item.getSellIn(), item.getQuality());
 
-        updateQualityNormalItem(item);
+//        if ("Aged Brie".equals(item.getName())) {
+//            abstractItem = ItemFactory.createAgedBrie(item.getSellIn(), item.getQuality());
+//        }
+//        if ("Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
+//            abstractItem = abstractItem = ItemFactory.createBackstagePasses(item.getSellIn(), item.getQuality());
+//        }
+//        if ("Sulfuras, Hand of Ragnaros".equals(item.getName())) {
+//            abstractItem = ItemFactory.createSulfuras(item.getSellIn());
+//        }
+
+        abstractItem.doUpdateQuality();
+        item.setSellIn(abstractItem.getSellIn());
+        item.setQuality(abstractItem.getQuality());
 
 //        if ((!"Aged Brie".equals(item.getName())) && !"Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
 //            if (item.getQuality() > 0) {
@@ -93,46 +95,6 @@ public class GildedRose {
 //                }
 //            }
 //        }
-    }
-
-    private static void updateQualitySulfuras(Item item) {
-
-    }
-
-    private static void updateQualityNormalItem(Item item) {
-        int qualityChangeRate = item.getSellIn() < 1 ? -2 : -1;
-        int qualityChanged = item.getQuality() + qualityChangeRate;
-        qualityChanged = qualityChanged > 50 ? 50 : qualityChanged;
-        qualityChanged = qualityChanged < 0 ? 0 : qualityChanged;
-
-        item.setQuality(qualityChanged);
-        item.setSellIn(item.getSellIn() - 1);
-    }
-
-    private static void updateQualityBackstagePasses(Item item) {
-        int qualityChangeRate = 1;
-        if (item.getSellIn() <= 10) {
-            qualityChangeRate = 2;
-        }
-        if (item.getSellIn() <= 5) {
-            qualityChangeRate = 3;
-        }
-        if (item.getSellIn() <= 0) {
-            qualityChangeRate = 0 - item.getQuality();
-        }
-
-        int qualityChanged = item.getQuality() + qualityChangeRate;
-
-        item.setQuality(qualityChanged > 50 ? 50 : qualityChanged);
-        item.setSellIn(item.getSellIn() - 1);
-    }
-
-    private static void updateQualityAgedBrie(Item item) {
-        int qualityChangeRate = item.getSellIn() < 1 ? 2 : 1;
-        int qualityChanged = item.getQuality() + qualityChangeRate;
-
-        item.setQuality(qualityChanged > 50 ? 50 : qualityChanged);
-        item.setSellIn(item.getSellIn() - 1);
     }
 
 }
