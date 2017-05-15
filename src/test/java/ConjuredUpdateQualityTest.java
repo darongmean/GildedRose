@@ -11,7 +11,7 @@ public class ConjuredUpdateQualityTest extends UpdateQualityTest {
     @Test
     public void test_QualityDegrade_AsItGetsOlder() {
         item = ItemFactory.createConjured(someSellIn, someQuality);
-//        when_updateQuality_assert_SellInAndQuality(someSellIn - 1, someQuality - 2);
+        when_updateQuality_assert_SellInAndQuality(someSellIn - 1, someQuality - 2);
     }
 
     @Test
@@ -19,7 +19,7 @@ public class ConjuredUpdateQualityTest extends UpdateQualityTest {
         int dateHasPassedSellIn = 0;
         item = ItemFactory.createConjured(dateHasPassedSellIn, someQuality);
 
-//        when_updateQuality_assert_SellInAndQuality(dateHasPassedSellIn - 1, someQuality - 2 * 2);
+        when_updateQuality_assert_SellInAndQuality(dateHasPassedSellIn - 1, someQuality - 2 * 2);
     }
 
     @Test
