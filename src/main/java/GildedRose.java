@@ -4,7 +4,7 @@ import java.util.List;
 
 public class GildedRose {
 
-    private static List<Item> items = null;
+    private static List<AbstractItem> items = null;
 
     /**
      * @param args
@@ -13,88 +13,20 @@ public class GildedRose {
 
         System.out.println("OMGHAI!");
 
-        items = new ArrayList<Item>();
-        items.add(new Item("+5 Dexterity Vest", 10, 20));
-        items.add(new Item("Aged Brie", 2, 0));
-        items.add(new Item("Elixir of the Mongoose", 5, 7));
-        items.add(new Item("Sulfuras, Hand of Ragnaros", 0, 80));
-        items.add(new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20));
-        items.add(new Item("Conjured Mana Cake", 3, 6));
+        items = new ArrayList<AbstractItem>();
+        items.add(ItemFactory.createItem("+5 Dexterity Vest", 10, 20));
+        items.add(ItemFactory.createItem("Aged Brie", 2, 0));
+        items.add(ItemFactory.createItem("Elixir of the Mongoose", 5, 7));
+        items.add(ItemFactory.createItem("Sulfuras, Hand of Ragnaros", 0, 80));
+        items.add(ItemFactory.createItem("Backstage passes to a TAFKAL80ETC concert", 15, 20));
+        items.add(ItemFactory.createItem("Conjured Mana Cake", 3, 6));
 
         updateQuality();
     }
 
     public static void updateQuality() {
-        for (int i = 0; i < items.size(); i++) {
-            updateQuality(items.get(i));
+        for (UpdateQuality item : items) {
+            item.doUpdateQuality();
         }
     }
-
-    public static void updateQuality(Item item) {
-        AbstractItem abstractItem;
-        abstractItem = ItemFactory.createItem(item.getName(), item.getSellIn(), item.getQuality());
-
-//        if ("Aged Brie".equals(item.getName())) {
-//            abstractItem = ItemFactory.createAgedBrie(item.getSellIn(), item.getQuality());
-//        }
-//        if ("Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
-//            abstractItem = abstractItem = ItemFactory.createBackstagePasses(item.getSellIn(), item.getQuality());
-//        }
-//        if ("Sulfuras, Hand of Ragnaros".equals(item.getName())) {
-//            abstractItem = ItemFactory.createSulfuras(item.getSellIn());
-//        }
-
-        abstractItem.doUpdateQuality();
-        item.setSellIn(abstractItem.getSellIn());
-        item.setQuality(abstractItem.getQuality());
-
-//        if ((!"Aged Brie".equals(item.getName())) && !"Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
-//            if (item.getQuality() > 0) {
-//                if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
-//                    item.setQuality(item.getQuality() - 1);
-//                }
-//            }
-//        } else {
-//            if (item.getQuality() < 50) {
-//                item.setQuality(item.getQuality() + 1);
-//
-//                if ("Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
-//                    if (item.getSellIn() < 11) {
-//                        if (item.getQuality() < 50) {
-//                            item.setQuality(item.getQuality() + 1);
-//                        }
-//                    }
-//
-//                    if (item.getSellIn() < 6) {
-//                        if (item.getQuality() < 50) {
-//                            item.setQuality(item.getQuality() + 1);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
-//            item.setSellIn(item.getSellIn() - 1);
-//        }
-//
-//        if (item.getSellIn() < 0) {
-//            if (!"Aged Brie".equals(item.getName())) {
-//                if (!"Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
-//                    if (item.getQuality() > 0) {
-//                        if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
-//                            item.setQuality(item.getQuality() - 1);
-//                        }
-//                    }
-//                } else {
-//                    item.setQuality(item.getQuality() - item.getQuality());
-//                }
-//            } else {
-//                if (item.getQuality() < 50) {
-//                    item.setQuality(item.getQuality() + 1);
-//                }
-//            }
-//        }
-    }
-
 }
